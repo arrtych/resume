@@ -8,12 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Responsive Resume">
     <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
-    <link rel="shortcut icon" href="favicon.ico"> 
-    
+    <link rel="shortcut icon" href="favicon.ico">    
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
     
 	<script defer src="assets/fontawesome/js/all.min.js"></script>
-
+	
     <link id="theme-style" rel="stylesheet" href="assets/css/pillar-1.css">
     
 	<!-- Google tag (gtag.js) -->
@@ -29,10 +28,64 @@
 
 </head> 
 
-<body>	
-	
+<body >	
 
-    <article class="resume-wrapper text-center position-relative">
+	<style>
+		#download-btn {
+			background: #434e5e;
+			color: rgba(255, 255, 255, 0.6);
+			border: oldlace;
+		}
+		#download-btn:hover {
+			color: white;
+			text-decoration: underline;
+		}
+
+		/* Print styles for stable, high quality PDF output */
+		@page {
+			size: A4;
+			/* Balanced page margins for consistent top/bottom spacing */
+			margin: 8mm 10mm;
+		}
+
+		@media print {
+			html, body {
+				margin: 0 !important;
+				padding: 0 !important;
+				background: #ffffff !important;
+				-webkit-print-color-adjust: exact !important;
+				print-color-adjust: exact !important;
+			}
+
+			.resume-wrapper {
+				padding: 0 !important;
+				margin: 0 auto !important;
+				width: auto !important;
+				max-width: none !important;
+			}
+
+			.resume-wrapper-inner {
+				width: 100% !important;
+				max-width: none !important;
+				box-shadow: none !important;
+				margin: 0 !important;
+				border: 0 !important;
+				background: #ffffff !important;
+			}
+
+			/* Allow natural page flow to avoid large blank areas */
+			.resume-timeline-item {
+				break-inside: auto;
+				page-break-inside: auto;
+			}
+
+			/* Do not print the download button itself */
+			#download-btn {
+				display: none !important;
+			}
+		}
+	</style>
+    <article class="resume-wrapper text-center position-relative" id="content">
 	    <div class="resume-wrapper-inner mx-auto text-left bg-white shadow-lg">
 		    <header class="resume-header pt-4 pt-md-0">
 			    <div class="media flex-column flex-md-row">
@@ -42,35 +95,54 @@
 						    <h1 class="name mt-0 mb-1 text-white text-uppercase text-uppercase">Artur Lipin</h1>
 						    <div class="title mb-3">Full Stack Developer</div>
 						    <ul class="list-unstyled">
-							    
+								<li class="mb-2"><a href="artur.lipin@protonmail.com"><i class="far fa-envelope fa-fw mr-2" data-fa-transform="grow-3"></i>artur.lipin@protonmail.com</a></li>
+							    <li><a href="#"><i class="fas fa-mobile-alt fa-fw mr-2" data-fa-transform="grow-6"></i>+372 5354 0743</a></li>
 						    </ul>
 					    </div><!--//primary-info-->
 					    <div class="secondary-info ml-md-auto mt-2">
 						    <ul class="resume-social list-unstyled">
 				                <li class="mb-3"><a href="https://linkedin.com/in/artur-lipin" target="_blank"><span class="fa-container text-center mr-2"><i class="fab fa-linkedin-in fa-fw"></i></span>https://linkedin.com/in/artur-lipin</a></li>
 				                <li class="mb-3"><a href="https://github.com/arrtych" target="_blank"><span class="fa-container text-center mr-2"><i class="fab fa-github-alt fa-fw"></i></span>github.com/arrtych</a></li>
-								<li class="mb-2"><a href="artur.lipin@protonmail.com"><i class="far fa-envelope fa-fw mr-2" data-fa-transform="grow-3"></i>artur.lipin@protonmail.com</a></li>
-							    <li><a href="#"><i class="fas fa-mobile-alt fa-fw mr-2" data-fa-transform="grow-6"></i>+372 5354 0743</a></li>
+							    <li><button id="download-btn" onclick="downloadPDF()"><i class="fas fa-download fa-fw mr-2" data-fa-transform="grow-6"></i>Download PDF</button></li>
 				                <!-- <li class="mb-3"><a href="#"><span class="fa-container text-center mr-2"><i class="fab fa-codepen fa-fw"></i></span>codepen.io/username/</a></li>
 				                <li><a href="#"><span class="fa-container text-center mr-2"><i class="fas fa-globe"></i></span>yourwebsite.com</a></li> -->
 						    </ul>
 					    </div><!--//secondary-info-->
-					    
+						<script>
+							function downloadPDF() {
+								const localPdfPath = 'pdf/Artur_Lipin_Resume.pdf?v=original';
+								const pdfWindow = window.open(encodeURI(localPdfPath), '_blank');
+
+								// If popup is blocked, still open the same PDF in current tab.
+								if (!pdfWindow) {
+									window.location.href = encodeURI(localPdfPath);
+								}
+							}
+
+							window.addEventListener('load', function () {
+								const params = new URLSearchParams(window.location.search);
+								if (params.get('print') === '1') {
+									setTimeout(function () {
+										window.print();
+									}, 250);
+								}
+							});
+						</script>
 				    </div><!--//media-body-->
 			    </div><!--//media-->
 		    </header>
 		    <div class="resume-body p-5">
 			    <section class="resume-section summary-section mb-5">
-				    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Career Summary</h2>
+				    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Professional Summary</h2>
 				    <div class="resume-section-content">
 						<p class="mb-0">
-						Experienced Full Stack Developer with expertise in C#, ASP.NET, ReactJS, and PHP, combining a strong analytical mind with a creative approach to problem-solving.<br><br>
+						Results-driven Full Stack Developer with 6+ years of experience delivering scalable web applications across fintech, logistics, and enterprise domains.<br><br>
 
-						I have a unique blend of analytical thinking and creative problem-solving skills, allowing me to craft full-stack solutions that are not only functional but also focused on product design and user experience.<br><br>
+						Strong expertise in <strong>C# / .NET</strong> backend development, <strong>React / TypeScript</strong> frontends, and <strong>RESTful API</strong> design.<br><br>
 
-						My knowledge of both front-end and back-end technologies ensures seamless integration with APIs, databases, and third-party systems.<br><br>
+						Proven ability to optimise system performance, lead feature delivery end-to-end, and collaborate effectively in cross-functional agile teams.<br><br>
 
-						Committed to continuous learning, I enjoy solving technical challenges and collaborating with teams to bring high-quality software to life and achieve successful results in projects.
+						Currently based in Tallinn - open to on-site roles in Estonia / Baltics and remote opportunities across Europe.
 						</p>
 				    </div>
 			    </section><!--//summary-section-->
@@ -84,17 +156,48 @@
 									<article class="resume-timeline-item position-relative pb-4">
 									    <div class="resume-timeline-item-header mb-2">
 										    <div class="d-flex flex-column flex-md-row">
-										        <h3 class="resume-position-title font-weight-bold mb-1">Software Developer</h3>
-										        <div class="resume-company-name ml-auto">Tallina Sadam AS</div>
+										        <h3 class="resume-position-title font-weight-bold mb-1">Full Stack Developer</h3>
+										        <div class="resume-company-name ml-auto">Directo OÜ</div>
 										    </div><!--//row-->
-										    <div class="resume-position-time">2023</div>
+										    <div class="resume-position-time">2024 - Present</div>
 									    </div><!--//resume-timeline-item-header-->
 									    <div class="resume-timeline-item-desc">
 										    <ul>
-											    <li>Full stack development. Design and implement scalable web applications that improved internal workflows</li>
-											    <li>Scripting for data processing and analysis. Developing and optimizing scripts for automating data processing and monitoring</li>
-												<li>Developing and maintaining applications for internal use. Build and maintenance custom internal applications for task automation and data visualization.</li>
-												<li>Working, maintaining and development different API solutions. Design, implementation, and maintenance RESTful APIs for seamless integration with external and internal services</li>
+											    <li>Developed customer-facing features using <strong>C# (.NET)</strong> and <strong>React / TypeScript</strong>, integrating new components into a high-traffic SaaS ERP platform used by 1 000+ businesses.</li>
+											    <li>Designed and maintained <strong>RESTful APIs</strong> supporting reliable data flow across services, <strong>MS SQL Server</strong> databases, and third-party integrations.</li>
+												<li>Delivered pixel-accurate, responsive UI components based on design specs, improving frontend maintainability and consistency across the product.</li>
+												<li>Optimised backend logic and database queries, contributing to measurable reductions in API response times on critical endpoints.</li>
+												<li>Collaborated with engineering, product, and design teams in an agile workflow to ship production-ready features on schedule.</li>
+										    </ul>
+										    <h4 class="resume-timeline-item-desc-heading font-weight-bold">Technologies used:</h4>
+										    <ul class="list-inline">
+											    <li class="list-inline-item"><span class="badge badge-primary badge-pill">C#</span></li>
+											    <li class="list-inline-item"><span class="badge badge-primary badge-pill">.NET</span></li>
+											    <li class="list-inline-item"><span class="badge badge-primary badge-pill">REST API</span></li>
+												<li class="list-inline-item"><span class="badge badge-primary badge-pill">MS SQL</span></li>
+												<li class="list-inline-item"><span class="badge badge-primary badge-pill">JavaScript</span></li>
+												<li class="list-inline-item"><span class="badge badge-primary badge-pill">React JS</span></li>
+												<li class="list-inline-item"><span class="badge badge-primary badge-pill">HTML/CSS</span></li>
+												<li class="list-inline-item"><span class="badge badge-primary badge-pill">Git</span></li>
+										    </ul>
+									    </div><!--//resume-timeline-item-desc-->
+
+								    </article><!--//resume-timeline-item-->
+
+									<article class="resume-timeline-item position-relative pb-4">
+									    <div class="resume-timeline-item-header mb-2">
+										    <div class="d-flex flex-column flex-md-row">
+										        <h3 class="resume-position-title font-weight-bold mb-1">Software Developer</h3>
+										        <div class="resume-company-name ml-auto">Tallinna Sadam AS (Port of Tallinn)</div>
+										    </div><!--//row-->
+										    <div class="resume-position-time">2023 - 2024</div>
+									    </div><!--//resume-timeline-item-header-->
+									    <div class="resume-timeline-item-desc">
+										    <ul>
+											    <li>Built and maintained scalable internal web applications using <strong>C# / ASP.NET Core</strong> and <strong>Blazor</strong>, streamlining operational workflows for port logistics teams.</li>
+											    <li>Designed and implemented <strong>RESTful APIs</strong> for seamless integration with external and internal enterprise services.</li>
+												<li>Developed automation scripts (<strong>PowerShell</strong>, <strong>Python</strong>) for data processing and system monitoring, reducing manual intervention time.</li>
+												<li>Maintained and optimised <strong>MS SQL Server</strong> databases, improving query performance for data-intensive reporting modules.</li>
 										    </ul>
 										    <h4 class="resume-timeline-item-desc-heading font-weight-bold">Technologies used:</h4>
 										    <ul class="list-inline">												
@@ -115,17 +218,16 @@
 									    
 									    <div class="resume-timeline-item-header mb-2">
 										    <div class="d-flex flex-column flex-md-row">
-										        <h3 class="resume-position-title font-weight-bold mb-1">Front-end Developer</h3>
+										        <h3 class="resume-position-title font-weight-bold mb-1">Front-End Developer</h3>
 										        <div class="resume-company-name ml-auto">021 OÜ</div>
 										    </div><!--//row-->
 										    <div class="resume-position-time">2022</div>
 									    </div><!--//resume-timeline-item-header-->
 									    <div class="resume-timeline-item-desc">
 										    <ul>
-											    <li>Front-end web development</li>
-											    <li>Developing and maintaining the user interface with a focus on UI/UX design implementation</li>
-												<li>Implementing pixel perfect and responsive design on mobile and desktop websites</li>
-											    <li>Getting the best practices and experience with development using React JS</li>
+											    <li>Implemented pixel-perfect, fully responsive UIs for mobile and desktop using <strong>React</strong>, <strong>TypeScript</strong>, <strong>Next.js</strong>, and <strong>GraphQL</strong>.</li>
+											    <li>Worked closely with designers using <strong>Figma / Zeplin</strong> to ensure faithful design-to-code delivery.</li>
+												<li>Applied <strong>MobX</strong> for state management and <strong>Stencil.js</strong> for reusable web components; upheld best practices in accessibility and performance.</li>
 										    </ul>
 										    <h4 class="resume-timeline-item-desc-heading font-weight-bold">Technologies used:</h4>
 										    <ul class="list-inline">
@@ -155,10 +257,8 @@
 									    </div><!--//resume-timeline-item-header-->
 									    <div class="resume-timeline-item-desc">
 										    <ul>
-											    <li>Full stack web development</li>
-											    <li>Installing and configuring Linux servers</li>
-											    <li>Scripting for data processing and analysis using Python and PowerShell</li>
-											    <!-- <li></li> -->
+											    <li>Delivered full-stack web solutions using <strong>PHP (Yii2)</strong>, <strong>PostgreSQL</strong>, <strong>jQuery</strong>, and <strong>HTML/CSS/JavaScript</strong>.</li>
+											    <li>Configured and administered <strong>Linux</strong> servers; wrote <strong>Python</strong> and <strong>PowerShell</strong> automation scripts for data processing and analytics pipelines.</li>
 										    </ul>
 										    <h4 class="resume-timeline-item-desc-heading font-weight-bold">Technologies used:</h4>
 										    <ul class="list-inline">
@@ -180,20 +280,15 @@
 									    
 									    <div class="resume-timeline-item-header mb-2">
 										    <div class="d-flex flex-column flex-md-row">
-										        <h3 class="resume-position-title font-weight-bold mb-1">Monitoring Spetsialist</h3>
+										        <h3 class="resume-position-title font-weight-bold mb-1">Monitoring Specialist</h3>
 										        <div class="resume-company-name ml-auto">Tallink Group AS</div>
 										    </div><!--//row-->
 										    <div class="resume-position-time">2019 - 2020</div>
 									    </div><!--//resume-timeline-item-header-->
 									    <div class="resume-timeline-item-desc">
-										    <p></p>
 											<ul>
-											    <li>Work with user groups to solve business problems with available technology including hardware, software,
-													databases, and peripherals</li>
-											    <li>Technical experience related to studying and analyzing systems needs, systems development, systems
-													process analysis, design, and reengineering</li>
-											    <li>Monitoring and configuration of IT internal services, scripting for data processing and analysis using PowerShell</li>
-											    <li>Web development of internal services, going through all the steps from start to deployment</li>
+											    <li>Developed internal web services end-to-end using <strong>C# ASP.NET Core</strong>, <strong>React</strong>, and <strong>Docker</strong>.</li>
+											    <li>Monitored and configured IT infrastructure; scripted automated reporting with <strong>PowerShell</strong>.</li>
 										    </ul>
 										    <h4 class="resume-timeline-item-desc-heading font-weight-bold">Technologies used:</h4>
 										    <ul class="list-inline">
@@ -208,32 +303,6 @@
 												<li class="list-inline-item"><span class="badge badge-primary badge-pill">Git</span></li>
 											    <li class="list-inline-item"><span class="badge badge-primary badge-pill">XML/JSON</span></li>												
 												<li class="list-inline-item"><span class="badge badge-primary badge-pill">Adobe XD</span></li>
-										    </ul>
-									    </div><!--//resume-timeline-item-desc-->
-
-								    </article><!--//resume-timeline-item-->
-								    
-								    <article class="resume-timeline-item position-relative pb-4">
-									    
-									    <div class="resume-timeline-item-header mb-2">
-										    <div class="d-flex flex-column flex-md-row">
-										        <h3 class="resume-position-title font-weight-bold mb-1">IT consultant</h3>
-										        <div class="resume-company-name ml-auto">Maxima Eesti OÜ</div>
-										    </div><!--//row-->
-										    <div class="resume-position-time">2018</div>
-									    </div><!--//resume-timeline-item-header-->
-									    <div class="resume-timeline-item-desc">
-										    <ul>
-											    <li>Software and hardware maintenance</li>
-											    <li>Customer‘s IT issues registration and handling</li>
-											    <li>Analysis and solution of customer's IT issues by phone and remote control</li>
-											    <!-- <li></li> -->
-										    </ul>
-											<h4 class="resume-timeline-item-desc-heading font-weight-bold">Technologies used:</h4>
-										    <ul class="list-inline">
-											    <li class="list-inline-item"><span class="badge badge-primary badge-pill">Windows Remote Desktop</span></li>
-											    <li class="list-inline-item"><span class="badge badge-primary badge-pill">PowerShell</span></li>
-											    <li class="list-inline-item"><span class="badge badge-primary badge-pill">MS Office</span></li>											    
 										    </ul>
 									    </div><!--//resume-timeline-item-desc-->
 
@@ -341,7 +410,7 @@
 								        <li class="mb-2">
 								            <div class="resume-skill-name">React JS</div>
 									        <div class="progress resume-progress">
-											    <div class="progress-bar theme-progress-bar-dark" role="progressbar" style="width: 65%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+											    <div class="progress-bar theme-progress-bar-dark" role="progressbar" style="width: 85%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 											</div>
 								        </li>
 
@@ -433,6 +502,20 @@
 						    </div>
 					    </section>
 						<!--//education-section-->
+						<section class="resume-section certification-section mb-5">
+							<h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Licenses and Certifications</h2>
+							<div class="resume-section-content">
+								<ul class="list-unstyled">
+									<li>
+										<div class="resume-degree font-weight-bold">Web Application Security</div>
+										<div class="resume-degree-org">Clarified Security OÜ</div>
+										<div class="resume-degree-time">Issue date: March 2025</div>
+										<div class="resume-degree-time">Credential ID: #134FE67</div>
+									</li>
+								</ul>
+							</div>
+						</section>
+						<!--//certification-section-->
 					    <!-- <section class="resume-section reference-section mb-5">
 						    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Awards</h2>
 						    <div class="resume-section-content">
